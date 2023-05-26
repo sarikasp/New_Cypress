@@ -23,3 +23,17 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+require('cypress-xpath');
+
+import 'cypress-iframe';
+
+import 'cypress-file-upload';
+
+
+Cypress.Commands.add('getiFrame', (iframe) => {
+    cy.get(iframe)
+    .its('0.contentDocument.body')
+    .should('be.visible')
+    .then(cy.wrap)
+})
