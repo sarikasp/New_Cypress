@@ -113,7 +113,7 @@ describe('traversal method in cypress', () => {
     })
 
 
-    it.only('To get all of the previous sibling DOM elements within elements until another element, use the .prevUntil() command.', function () {
+    it('To get all of the previous sibling DOM elements within elements until another element, use the .prevUntil() command.', function () {
         cy.visit('http://www.webdriveruniversity.com/Data-Table/index.html')
         cy.get('.traversal-food-list').prevUntil('.traversal-drinks-list').should('have.length',1)
         cy.get('#sugar').prevUntil('#coffee').should('have.length',3)
