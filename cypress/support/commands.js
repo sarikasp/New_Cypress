@@ -11,7 +11,7 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
-//
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
@@ -33,7 +33,51 @@ import 'cypress-file-upload';
 
 Cypress.Commands.add('getiFrame', (iframe) => {
     cy.get(iframe)
-    .its('0.contentDocument.body')
-    .should('be.visible')
-    .then(cy.wrap)
+        .its('0.contentDocument.body')
+        .should('be.visible')
+        .then(cy.wrap)
+})
+
+
+Cypress.Commands.add('clickLink', (label) => {
+    cy.get('a').contains(label).click()
+})
+
+// //  overwrite contains() function
+// Cypress.Commands.overwrite('contains', (originalFn, subject, filter, text, options = {}) => {
+//     // determine if a filter argument was passed
+//     if(typeof text === 'object'){
+//         options = text
+//         text = filter
+//         filter = undefined
+//     }
+//     options.matchCase = false
+//     return originalFn(subject, filter, text, options)
+// })
+
+
+// Cypress.Commands.overwrite('contains',(originalFn, subject, filter, text, options = {}) => {
+//         // determine if a filter argument was passed
+//         if (typeof text === 'object') {
+//             options = text
+//             text = filter
+//             filter = undefined
+//         }
+
+// options.matchCase = false
+
+// return originalFn(subject, filter, text, options)
+//     }
+// )
+
+// Cypress.Commands.overwrite("contains", (originalFn, subject, filter, text, options = {}) => {
+//     return originalFn(subject, selectorOrDataTestId(filter), text, options);
+// })
+
+// 
+Cypress.Commands.add('login', (email, password) => {
+    // cy.visit('https://demo.nopcommerce.com/login?returnUrl=%2F')
+    cy.get('#Email').type(email)
+    cy.get('#Password').type(password)
+    cy.get('.login-button').click()
 })
